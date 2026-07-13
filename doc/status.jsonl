@@ -1,0 +1,1 @@
+{"date": "2026-07-13", "version": "0.0.1", "summary": "M0 基建完成：vendor 快照(FlooNoC v0.8.4+4 依赖锁 SHA)、脚本体系/skills/hooks 移植、VCS2018 排雷(P-001 补丁)、上游 tb 冒烟 PASS(M0-01✅)、spec v0 经 REV-001 两轮审查后 pin。下一步 M1 UVM 骨架。"}

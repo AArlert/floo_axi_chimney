@@ -1,0 +1,14 @@
+sim/out/
+sim/csrc/
+sim/simv*
+sim/*.daidir
+sim/ucli.key
+sim/vc_hdrs.h
+sim/novas.*
+sim/verdiLog/
+sim/nWaveLog/
+sim/result_summary.txt
+*.fsdb
+*.vpd
+*.log
+!doc/evidence/**/*.log

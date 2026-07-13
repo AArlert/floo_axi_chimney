@@ -1,0 +1,2 @@
+# 回归列表：每行 "<TEST> <SEED>"，# 开头为注释
+# M1 建立 UVM 环境后填入；M0 阶段冒烟走 make smoke（上游 sanity tb）

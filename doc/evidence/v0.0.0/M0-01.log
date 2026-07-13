@@ -1,0 +1,12 @@
+make run TEST=upstream_sanity SEED=1
+# 由 scripts/evidence.py 于 2026-07-13 机械生成，源 log: sim/out/upstream_sanity_1.log
+
+## UVM Report Summary
+[Monitor ][Write] Latency: 165.66 +- 545.05, BW: 2.55 Bits/cycle, Util: 3.99%
+tb_floo_axi_chimney.sv, 261 :     $stop;
+           V C S   S i m u l a t i o n   R e p o r t 
+Time: 2811040000 ps
+CPU Time:     13.930 seconds;       Data structure size:   0.7Mb
+Mon Jul 13 08:21:57 2026
+
+## 关键检查行
