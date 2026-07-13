@@ -18,7 +18,7 @@ DUT 为 vendor 只读快照（FlooNoC v0.8.4），交付物 = UVM 验证环境 +
 
 ```
 doc/       spec.md（单一事实源）+ 记忆系统 + testplan.md + feature-matrix.md + bugs.md
-           + lint-waivers.md + evidence/ + review/（rev 书面记录）
+           + lint-waivers.md + evidence/ + review/（rev 书面记录）+ archive/（归档件）+ attachment/（图）
 vendor/    DUT 与依赖库只读快照（VENDOR.md 记录上游 SHA；禁止未登记的修改）
 tb/        uvm/（一类一文件，*_pkg.sv 汇总 include）+ sva/（协议断言，bind 挂接）
 sim/       VCS 仿真入口（Makefile、flist/、regress/）
@@ -40,7 +40,7 @@ scripts/   机械工作脚本（docs.py / bump.py / regress.py / evidence.py）
 2. `log.md` — 交接日志，块头 `## [版本] 日期 标题`，新的在上；仓库内最多 4 块，超限脚本归档。
 3. `testplan.md` — 场景真值表，状态位 ✅/❌/⚠️/🔲（✅ 及证据由 evidence.py 回填）。
 
-`make bump` 自动插入 TODO 骨架，agent 只填语义；docs-check 拦截未填的 TODO。归档件 `*-archive.*` **默认不读**，只在追溯历史时 grep。
+`make bump` 自动插入 TODO 骨架，agent 只填语义；docs-check 拦截未填的 TODO。归档件统一放 `doc/archive/`（`*-archive.*`），**默认不读**，只在追溯历史时 grep。
 
 **Token 纪律**：grep/rg 定位再精读，不通读大文件；不读归档件；不读已 ✅ 条目细节；spec.md 按章节定位（`grep -n "^#" doc/spec.md` 取目录）；不通读 vendor RTL（按需 grep）。
 

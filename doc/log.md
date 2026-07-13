@@ -1,5 +1,22 @@
 # 交接日志（新的在上；仓库内最多 4 块，超限 make docs-archive 归档到 log-archive.md）
 
+## [0.0.2] 2026-07-13 README 重写为项目导读 + 验证全景图 + 背压规划 + archive 归位
+
+**做了什么**
+- doc/attachment/verif_overview.svg：一张全景图讲清 DUT 内部通路、全部端口、UVM 组件（三 agent/scb/cfg）与激励/观测/配置三条传递链、flit 结构与通道映射。
+- README.md 重写为面向人的项目说明（用户后续亲自维护）：DUT 本质与 vendor 独立机制、验证环境图文（含 virtual interface 机制）、路线图、背压五场景规划、命令速查、SV/UVM/AXI4/NoC/覆盖率知识勾选清单。
+- testplan 登记 M2-BP01..BP05 背压场景（🔲，M2 实现载体=slave 延迟旋钮+active floo agent ready 控制）。
+- 归档件迁至 doc/archive/（git mv 四文件），docs.py 路径常量/报错文案、handover skill、CLAUDE.md §1§3 同步适配。
+
+**没做什么**
+- 未动 tb/（M1 交付）；全景图为 M1 目标形态示意，组件落地后如有出入需回改图。
+
+**下一步**
+- M1：主会话出 UVM 骨架（chimney_tb_cfg.sv/三 interface/三 agent 空壳/env/test/pkg + flist/tb.f），用户填核心逻辑。
+
+**如何验证**
+- make docs-check / docs-archive / handover 全通过（archive 新路径连通）；GitHub 页面看 README 全景图渲染与勾选清单；git log 看 git mv 保留历史。
+
 ## [0.0.1] 2026-07-13 M0 基建完成：vendor+脚本体系+VCS 排雷+spec v0
 
 **做了什么**

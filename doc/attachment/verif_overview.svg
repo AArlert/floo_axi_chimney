@@ -1,0 +1,208 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1460 1060" font-family="'Noto Sans CJK SC','Microsoft YaHei',sans-serif" font-size="13">
+  <!-- 验证全景图：DUT 内部结构 + UVM 环境 + 数据/事务/配置三条链 -->
+  <defs>
+    <marker id="arr" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
+      <polygon points="0 0, 9 3.5, 0 7" fill="#37474f"/>
+    </marker>
+    <marker id="arrB" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
+      <polygon points="0 0, 9 3.5, 0 7" fill="#1565c0"/>
+    </marker>
+    <marker id="arrG" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
+      <polygon points="0 0, 9 3.5, 0 7" fill="#2e7d32"/>
+    </marker>
+    <marker id="arrO" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
+      <polygon points="0 0, 9 3.5, 0 7" fill="#e65100"/>
+    </marker>
+  </defs>
+  <rect width="1460" height="1060" fill="#ffffff"/>
+  <text x="730" y="30" text-anchor="middle" font-size="20" font-weight="bold" fill="#263238">floo_axi_chimney 验证全景图（DUT 内部 · UVM 环境 · 三条传递链）</text>
+
+  <!-- ======== UVM 环境外框 (tb_top / env) ======== -->
+  <rect x="20" y="50" width="1420" height="820" fill="none" stroke="#78909c" stroke-width="1.5" stroke-dasharray="8 5" rx="10"/>
+  <text x="35" y="72" fill="#546e7a" font-weight="bold">tb_top（interface 实例化 + env；M1 目标形态，M2 起 floo_link_agent 转 active）</text>
+
+  <!-- 配置对象 -->
+  <rect x="40" y="90" width="230" height="70" fill="#fff8e1" stroke="#f9a825" rx="6"/>
+  <text x="155" y="112" text-anchor="middle" font-weight="bold" fill="#795548">chimney_tb_cfg</text>
+  <text x="155" y="130" text-anchor="middle" fill="#6d4c41" font-size="12">参数/位宽/开关唯一定义点</text>
+  <text x="155" y="147" text-anchor="middle" fill="#6d4c41" font-size="12">经 uvm_config_db 下发（橙色点线）</text>
+
+  <!-- scoreboard -->
+  <rect x="1090" y="90" width="330" height="120" fill="#e8f5e9" stroke="#2e7d32" stroke-width="1.5" rx="6"/>
+  <text x="1255" y="113" text-anchor="middle" font-weight="bold" fill="#1b5e20">scoreboard + 参考模型</text>
+  <text x="1255" y="133" text-anchor="middle" font-size="12" fill="#33691e">AXI 事务 ↔ flit 序列双向比对</text>
+  <text x="1255" y="150" text-anchor="middle" font-size="12" fill="#33691e">header 字段核对（dst/src/rob_*/atop/last/axi_ch）</text>
+  <text x="1255" y="167" text-anchor="middle" font-size="12" fill="#33691e">保序检查（同 txnID 响应序 = 请求序）</text>
+  <text x="1255" y="190" text-anchor="middle" font-size="12" fill="#33691e">输入：三个 monitor 的 analysis port（绿色虚线）</text>
+
+  <!-- ======== 左：axi_master_agent ======== -->
+  <rect x="40" y="250" width="250" height="330" fill="#e3f2fd" stroke="#1565c0" stroke-width="1.5" rx="8"/>
+  <text x="165" y="273" text-anchor="middle" font-weight="bold" fill="#0d47a1">axi_master_agent（激励侧）</text>
+  <rect x="60" y="288" width="210" height="52" fill="#ffffff" stroke="#1565c0" rx="4"/>
+  <text x="165" y="308" text-anchor="middle" font-size="12" fill="#0d47a1">sequence（单读写/burst/ATOP/</text>
+  <text x="165" y="325" text-anchor="middle" font-size="12" fill="#0d47a1">乱序 txnID/背压组合场景）</text>
+  <rect x="60" y="356" width="210" height="36" fill="#ffffff" stroke="#1565c0" rx="4"/>
+  <text x="165" y="379" text-anchor="middle" font-size="12" fill="#0d47a1">sequencer（仲裁多序列）</text>
+  <rect x="60" y="408" width="210" height="36" fill="#ffffff" stroke="#1565c0" rx="4"/>
+  <text x="165" y="431" text-anchor="middle" font-size="12" fill="#0d47a1">driver（事务→AXI 五通道时序）</text>
+  <rect x="60" y="460" width="210" height="36" fill="#ffffff" stroke="#1565c0" rx="4"/>
+  <text x="165" y="483" text-anchor="middle" font-size="12" fill="#0d47a1">monitor（总线→事务，只看不驱）</text>
+  <text x="165" y="522" text-anchor="middle" font-size="12" fill="#1565c0">B/R ready 延迟旋钮</text>
+  <text x="165" y="539" text-anchor="middle" font-size="12" fill="#1565c0">（慢主背压 M2-BP04）</text>
+  <!-- seq→sqr→drv 链 -->
+  <line x1="165" y1="340" x2="165" y2="356" stroke="#1565c0" stroke-width="1.5" marker-end="url(#arrB)"/>
+  <line x1="165" y1="392" x2="165" y2="408" stroke="#1565c0" stroke-width="1.5" marker-end="url(#arrB)"/>
+
+  <!-- vif_axi_in -->
+  <rect x="310" y="380" width="96" height="88" fill="#eceff1" stroke="#455a64" rx="4"/>
+  <text x="358" y="404" text-anchor="middle" font-size="12" font-weight="bold" fill="#37474f">virtual</text>
+  <text x="358" y="420" text-anchor="middle" font-size="12" font-weight="bold" fill="#37474f">interface</text>
+  <text x="358" y="440" text-anchor="middle" font-size="11" fill="#546e7a">axi_in_if</text>
+  <text x="358" y="457" text-anchor="middle" font-size="11" fill="#546e7a">(config_db 取用)</text>
+  <line x1="270" y1="426" x2="310" y2="426" stroke="#1565c0" stroke-width="2" marker-end="url(#arrB)"/>
+  <line x1="310" y1="450" x2="272" y2="474" stroke="#1565c0" stroke-width="1.2" marker-end="url(#arrB)"/>
+  <text x="300" y="486" text-anchor="middle" font-size="10" fill="#546e7a">mon 采样</text>
+
+  <!-- ======== 中央 DUT ======== -->
+  <rect x="430" y="240" width="560" height="500" fill="#fce4ec" stroke="#ad1457" stroke-width="2.5" rx="10"/>
+  <text x="710" y="266" text-anchor="middle" font-size="16" font-weight="bold" fill="#880e4f">DUT: floo_axi_chimney（AXI4 ↔ NoC 链路桥）</text>
+  <text x="710" y="284" text-anchor="middle" font-size="11" fill="#ad1457">顶层 1 文件 + 6 子模块文件 + floo_pkg/typedef 宏（vendor 快照，只读）</text>
+
+  <!-- DUT 顶部小端口 -->
+  <text x="470" y="232" font-size="11" fill="#880e4f">clk_i / rst_ni</text>
+  <text x="590" y="232" font-size="11" fill="#880e4f">id_i（本节点坐标）</text>
+  <text x="760" y="232" font-size="11" fill="#880e4f">route_table_i（源路由表）</text>
+  <line x1="495" y1="236" x2="495" y2="240" stroke="#880e4f" stroke-width="1.5"/>
+  <line x1="640" y1="236" x2="640" y2="240" stroke="#880e4f" stroke-width="1.5"/>
+  <line x1="830" y1="236" x2="830" y2="240" stroke="#880e4f" stroke-width="1.5"/>
+
+  <!-- 请求路径（上半，左→右） -->
+  <rect x="450" y="310" width="90" height="56" fill="#ffffff" stroke="#ad1457" rx="4"/>
+  <text x="495" y="333" text-anchor="middle" font-size="11" fill="#880e4f">spill 寄存</text>
+  <text x="495" y="349" text-anchor="middle" font-size="11" fill="#880e4f">(CutAx)</text>
+  <rect x="560" y="300" width="130" height="76" fill="#ffffff" stroke="#ad1457" rx="4"/>
+  <text x="625" y="322" text-anchor="middle" font-size="11" fill="#880e4f">flit 打包 + 路由计算</text>
+  <text x="625" y="338" text-anchor="middle" font-size="11" fill="#880e4f">floo_id_translation</text>
+  <text x="625" y="354" text-anchor="middle" font-size="10" fill="#ad1457">地址→dst_id（XY 偏移/</text>
+  <text x="625" y="368" text-anchor="middle" font-size="10" fill="#ad1457">SAM 表/源路由查表）</text>
+  <rect x="710" y="300" width="120" height="76" fill="#ffffff" stroke="#ad1457" rx="4"/>
+  <text x="770" y="326" text-anchor="middle" font-size="11" fill="#880e4f">wormhole 仲裁</text>
+  <text x="770" y="342" text-anchor="middle" font-size="11" fill="#880e4f">req：AW/W/AR 交织</text>
+  <text x="770" y="358" text-anchor="middle" font-size="11" fill="#880e4f">rsp：B/R 交织</text>
+  <rect x="850" y="310" width="90" height="56" fill="#ffffff" stroke="#ad1457" rx="4"/>
+  <text x="895" y="333" text-anchor="middle" font-size="11" fill="#880e4f">出口寄存</text>
+  <text x="895" y="349" text-anchor="middle" font-size="11" fill="#880e4f">(CutOup)</text>
+  <line x1="540" y1="338" x2="560" y2="338" stroke="#37474f" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="690" y1="338" x2="710" y2="338" stroke="#37474f" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="830" y1="338" x2="850" y2="338" stroke="#37474f" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- 响应路径（下半，右→左） -->
+  <rect x="850" y="420" width="90" height="56" fill="#ffffff" stroke="#ad1457" rx="4"/>
+  <text x="895" y="443" text-anchor="middle" font-size="11" fill="#880e4f">入链路寄存</text>
+  <text x="895" y="459" text-anchor="middle" font-size="11" fill="#880e4f">(CutRsp)</text>
+  <rect x="710" y="420" width="120" height="56" fill="#ffffff" stroke="#ad1457" rx="4"/>
+  <text x="770" y="443" text-anchor="middle" font-size="11" fill="#880e4f">flit 解包</text>
+  <text x="770" y="459" text-anchor="middle" font-size="11" fill="#880e4f">（按 hdr.axi_ch 分发）</text>
+  <rect x="560" y="404" width="130" height="40" fill="#ffffff" stroke="#ad1457" rx="4"/>
+  <text x="625" y="429" text-anchor="middle" font-size="11" fill="#880e4f">RoB(B)：No/Simple/Normal</text>
+  <rect x="560" y="452" width="130" height="40" fill="#ffffff" stroke="#ad1457" rx="4"/>
+  <text x="625" y="477" text-anchor="middle" font-size="11" fill="#880e4f">RoB(R)：No/Simple/Normal</text>
+  <text x="625" y="510" text-anchor="middle" font-size="10" fill="#ad1457">乱序响应重排/串行化/stall 保序（配置选型）</text>
+  <line x1="850" y1="448" x2="830" y2="448" stroke="#37474f" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="710" y1="440" x2="690" y2="428" stroke="#37474f" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="710" y1="456" x2="690" y2="468" stroke="#37474f" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="560" y1="424" x2="470" y2="424" stroke="#37474f" stroke-width="1.5"/>
+  <line x1="560" y1="472" x2="470" y2="472" stroke="#37474f" stroke-width="1.5"/>
+  <line x1="470" y1="424" x2="470" y2="446" stroke="#37474f" stroke-width="1.5"/>
+  <line x1="470" y1="472" x2="470" y2="450" stroke="#37474f" stroke-width="1.5"/>
+  <line x1="470" y1="448" x2="434" y2="448" stroke="#37474f" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- 出 NoC 方向（axi_out）：meta buffer + err_slv -->
+  <rect x="560" y="560" width="200" height="70" fill="#ffffff" stroke="#ad1457" rx="4"/>
+  <text x="660" y="583" text-anchor="middle" font-size="11" fill="#880e4f">floo_meta_buffer（NoC→下游）</text>
+  <text x="660" y="599" text-anchor="middle" font-size="10" fill="#ad1457">txnID 重映射：默认全部→'1 串行化</text>
+  <text x="660" y="614" text-anchor="middle" font-size="10" fill="#ad1457">MaxUniqueIds&gt;1 时 id_queue 乱序；存 src_id 供回程</text>
+  <rect x="800" y="560" width="120" height="70" fill="#ffffff" stroke="#ad1457" rx="4"/>
+  <text x="860" y="588" text-anchor="middle" font-size="11" fill="#880e4f">axi_err_slv</text>
+  <text x="860" y="604" text-anchor="middle" font-size="10" fill="#ad1457">EnMgr/SbrPort=0 时</text>
+  <text x="860" y="618" text-anchor="middle" font-size="10" fill="#ad1457">退化端口错误应答</text>
+  <text x="710" y="660" text-anchor="middle" font-size="11" fill="#880e4f">▼ 解包后的 AW/W/AR 经 meta_buffer 重映射 txnID 后发往 axi_out；B/R 响应按存储的 src_id 打包回 NoC ▲</text>
+
+  <!-- DUT 左端口 -->
+  <text x="438" y="404" font-size="12" font-weight="bold" fill="#880e4f">axi_in（slave 口）</text>
+  <line x1="406" y1="426" x2="430" y2="426" stroke="#1565c0" stroke-width="2" marker-end="url(#arrB)"/>
+
+  <!-- DUT 右端口：floo 链路 -->
+  <line x1="940" y1="338" x2="1100" y2="338" stroke="#37474f" stroke-width="2.5" marker-end="url(#arr)"/>
+  <text x="1042" y="330" text-anchor="middle" font-size="12" font-weight="bold" fill="#263238">floo_req_o</text>
+  <line x1="1100" y1="448" x2="940" y2="448" stroke="#37474f" stroke-width="2.5" marker-end="url(#arr)"/>
+  <text x="1042" y="440" text-anchor="middle" font-size="12" font-weight="bold" fill="#263238">floo_req_i / floo_rsp_i</text>
+  <line x1="940" y1="390" x2="1100" y2="390" stroke="#37474f" stroke-width="2.5" marker-end="url(#arr)"/>
+  <text x="1042" y="382" text-anchor="middle" font-size="12" font-weight="bold" fill="#263238">floo_rsp_o</text>
+  <text x="1042" y="470" text-anchor="middle" font-size="10" fill="#546e7a">每链路 = valid/ready 握手 + flit</text>
+
+  <!-- DUT 底端口 axi_out -->
+  <line x1="660" y1="740" x2="660" y2="800" stroke="#1565c0" stroke-width="2" marker-end="url(#arrB)"/>
+  <text x="676" y="770" font-size="12" font-weight="bold" fill="#880e4f">axi_out（master 口）</text>
+
+  <!-- ======== 右：floo_link_agent ======== -->
+  <rect x="1100" y="250" width="320" height="330" fill="#ede7f6" stroke="#5e35b1" stroke-width="1.5" rx="8"/>
+  <text x="1260" y="273" text-anchor="middle" font-weight="bold" fill="#4527a0">floo_link_agent（NoC 对端，本项目最硬核件）</text>
+  <rect x="1120" y="288" width="130" height="80" fill="#ffffff" stroke="#5e35b1" rx="4"/>
+  <text x="1185" y="310" text-anchor="middle" font-size="12" fill="#4527a0">monitor（M1）</text>
+  <text x="1185" y="327" text-anchor="middle" font-size="11" fill="#5e35b1">flit 解码：hdr 字段</text>
+  <text x="1185" y="343" text-anchor="middle" font-size="11" fill="#5e35b1">+payload 还原 AXI</text>
+  <text x="1185" y="359" text-anchor="middle" font-size="11" fill="#5e35b1">通道事务</text>
+  <rect x="1270" y="288" width="130" height="80" fill="#ffffff" stroke="#5e35b1" rx="4"/>
+  <text x="1335" y="310" text-anchor="middle" font-size="12" fill="#4527a0">driver（M2 起）</text>
+  <text x="1335" y="327" text-anchor="middle" font-size="11" fill="#5e35b1">乱序响应注入(打 RoB)</text>
+  <text x="1335" y="343" text-anchor="middle" font-size="11" fill="#5e35b1">ready 背压(BP01/02)</text>
+  <text x="1335" y="359" text-anchor="middle" font-size="11" fill="#5e35b1">错误响应注入</text>
+  <rect x="1120" y="384" width="280" height="60" fill="#ffffff" stroke="#5e35b1" rx="4"/>
+  <text x="1260" y="406" text-anchor="middle" font-size="11" fill="#4527a0">vif: floo_link_if（req/rsp 双链路、双向）</text>
+  <text x="1260" y="424" text-anchor="middle" font-size="11" fill="#5e35b1">扮演整个 NoC：接收 DUT 注入的 flit、</text>
+  <text x="1260" y="438" text-anchor="middle" font-size="11" fill="#5e35b1">回送响应 flit（等效对端 chimney+网络）</text>
+  <text x="1260" y="470" text-anchor="middle" font-size="11" fill="#5e35b1">M1 被动：req 环回内部模型生成合法响应</text>
+  <text x="1260" y="488" text-anchor="middle" font-size="11" fill="#5e35b1">M2 主动：按场景控制响应序/时序/合法性</text>
+
+  <!-- ======== 下：axi_slave_agent ======== -->
+  <rect x="470" y="800" width="400" height="60" fill="#e0f2f1" stroke="#00695c" stroke-width="1.5" rx="8"/>
+  <text x="670" y="822" text-anchor="middle" font-weight="bold" fill="#004d40">axi_slave_agent（下游从设备）：driver 生成响应 + monitor</text>
+  <text x="670" y="842" text-anchor="middle" font-size="12" fill="#00695c">延迟旋钮 Fast/Slow/Random（慢从背压 M2-BP03）· vif: axi_out_if</text>
+
+  <!-- ======== 观测链（绿色虚线 analysis port）======== -->
+  <path d="M 165 460 C 165 150, 700 110, 1090 130" fill="none" stroke="#2e7d32" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#arrG)"/>
+  <path d="M 1185 288 C 1200 240, 1230 225, 1250 210" fill="none" stroke="#2e7d32" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#arrG)"/>
+  <path d="M 870 830 C 1150 830, 1380 500, 1390 210" fill="none" stroke="#2e7d32" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#arrG)"/>
+  <text x="640" y="128" font-size="12" fill="#2e7d32">观测链：monitor → analysis port → scoreboard（uvm_analysis_port.write）</text>
+
+  <!-- ======== 配置链（橙色点线）======== -->
+  <path d="M 270 118 C 380 130, 380 200, 250 250" fill="none" stroke="#e65100" stroke-width="1.5" stroke-dasharray="2 4" marker-end="url(#arrO)"/>
+  <path d="M 270 140 C 700 170, 1050 200, 1150 250" fill="none" stroke="#e65100" stroke-width="1.5" stroke-dasharray="2 4" marker-end="url(#arrO)"/>
+  <path d="M 155 160 C 160 600, 300 830, 470 840" fill="none" stroke="#e65100" stroke-width="1.5" stroke-dasharray="2 4" marker-end="url(#arrO)"/>
+
+  <!-- ======== 底部注解区 ======== -->
+  <!-- flit 结构 -->
+  <rect x="40" y="890" width="700" height="150" fill="#f5f5f5" stroke="#9e9e9e" rx="8"/>
+  <text x="60" y="915" font-weight="bold" fill="#37474f">flit 结构（链路上传输的最小单元；header 与 payload 并行传输）</text>
+  <rect x="60" y="930" width="360" height="34" fill="#ffe0b2" stroke="#ef6c00"/>
+  <text x="240" y="952" text-anchor="middle" font-size="12" fill="#e65100">hdr：dst_id · src_id · last · axi_ch · rob_req · rob_idx · atop</text>
+  <rect x="420" y="930" width="220" height="34" fill="#c8e6c9" stroke="#388e3c"/>
+  <text x="530" y="952" text-anchor="middle" font-size="12" fill="#1b5e20">payload：AXI 某通道原始载荷</text>
+  <rect x="640" y="930" width="80" height="34" fill="#eceff1" stroke="#78909c"/>
+  <text x="680" y="952" text-anchor="middle" font-size="12" fill="#546e7a">rsvd 填充</text>
+  <text x="60" y="990" font-size="12" fill="#37474f">通道映射：<tspan font-weight="bold" fill="#0d47a1">AW / W / AR → req 物理链路</tspan>（wormhole 交织，last 位锁包）；<tspan font-weight="bold" fill="#4527a0">B / R → rsp 物理链路</tspan></text>
+  <text x="60" y="1012" font-size="12" fill="#37474f">保序职责：NoC 不保序 → 由 chimney 用 RoB（重排）或 stall（NoRoB 计数阻塞）满足 AXI 同 txnID 响应序 = 请求序</text>
+
+  <!-- 图例 -->
+  <rect x="770" y="890" width="650" height="150" fill="#f5f5f5" stroke="#9e9e9e" rx="8"/>
+  <text x="790" y="915" font-weight="bold" fill="#37474f">图例与三条传递链</text>
+  <line x1="790" y1="938" x2="850" y2="938" stroke="#1565c0" stroke-width="2" marker-end="url(#arrB)"/>
+  <text x="865" y="943" font-size="12" fill="#37474f">激励链：sequence → sequencer → driver → virtual interface → DUT 引脚（蓝实线）</text>
+  <line x1="790" y1="966" x2="850" y2="966" stroke="#2e7d32" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#arrG)"/>
+  <text x="865" y="971" font-size="12" fill="#37474f">观测链：DUT 引脚 → monitor 采样还原事务 → analysis port → scoreboard（绿虚线）</text>
+  <line x1="790" y1="994" x2="850" y2="994" stroke="#e65100" stroke-width="1.5" stroke-dasharray="2 4" marker-end="url(#arrO)"/>
+  <text x="865" y="999" font-size="12" fill="#37474f">配置链：chimney_tb_cfg → uvm_config_db → 各组件/vif 句柄下发（橙点线）</text>
+  <line x1="790" y1="1022" x2="850" y2="1022" stroke="#37474f" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="865" y="1027" font-size="12" fill="#37474f">DUT 内部数据通路（黑实线）；虚线大框 = UVM 组件容器边界</text>
+</svg>

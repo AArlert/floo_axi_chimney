@@ -19,17 +19,17 @@ DOC = ROOT / "doc"
 
 VERSION_JSON = ROOT / "version.json"
 STATUS = DOC / "status.jsonl"
-STATUS_ARCHIVE = DOC / "status-archive.jsonl"
+STATUS_ARCHIVE = DOC / "archive" / "status-archive.jsonl"
 LOG = DOC / "log.md"
-LOG_ARCHIVE = DOC / "log-archive.md"
+LOG_ARCHIVE = DOC / "archive" / "log-archive.md"
 TESTPLAN = DOC / "testplan.md"
 FEATURE_MATRIX = DOC / "feature-matrix.md"
 SPEC = DOC / "spec.md"
 SPEC_SHA = DOC / "spec.sha256"
 BUGS = DOC / "bugs.md"
-BUGS_ARCHIVE = DOC / "bugs-archive.md"
+BUGS_ARCHIVE = DOC / "archive" / "bugs-archive.md"
 WAIVERS = DOC / "lint-waivers.md"
-WAIVERS_ARCHIVE = DOC / "lint-waivers-archive.md"
+WAIVERS_ARCHIVE = DOC / "archive" / "lint-waivers-archive.md"
 TB_DIR = ROOT / "tb"
 
 BUG_STATES = ("OPEN", "FIXING", "FIX_READY", "VERIFYING", "CLOSED",
@@ -384,7 +384,7 @@ def cmd_check():
         errors.append(f"bugs.md 终态缺陷行 {len(done_bugs)} > {BUG_DONE_MAX}，请执行: make docs-archive")
     for r in abug_rows:
         if r.get("状态", "").strip() not in BUG_DONE_STATES:
-            errors.append(f"bugs-archive.md {r.get('ID', '?')} 状态 {r.get('状态', '')!r} 非终态"
+            errors.append(f"archive/bugs-archive.md {r.get('ID', '?')} 状态 {r.get('状态', '')!r} 非终态"
                           "——活跃缺陷不得归档，请移回 bugs.md")
     for r in bug_rows:
         bid = r.get("ID", "?")
@@ -417,7 +417,7 @@ def cmd_check():
                       "请执行: make docs-archive")
     for r in awv_rows:
         if not waiver_done(r):
-            errors.append(f"lint-waivers-archive.md #{r.get('#', '?')} 未经 rev 批准"
+            errors.append(f"archive/lint-waivers-archive.md #{r.get('#', '?')} 未经 rev 批准"
                           "——待复核豁免不得归档，请移回 lint-waivers.md")
 
     # spec.md 变更守卫（修改需登记修改记录并重新 pin）

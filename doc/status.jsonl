@@ -1,1 +1,2 @@
+{"date": "2026-07-13", "version": "0.0.2", "summary": "README 重写为项目导读（DUT/验证环境/路线图/知识清单）+ 验证全景图 verif_overview.svg + 背压五场景登记(M2-BP01..05) + 归档件迁 doc/archive/ 并适配脚本。下一步 M1 UVM 骨架。"}
 {"date": "2026-07-13", "version": "0.0.1", "summary": "M0 基建完成：vendor 快照(FlooNoC v0.8.4+4 依赖锁 SHA)、脚本体系/skills/hooks 移植、VCS2018 排雷(P-001 补丁)、上游 tb 冒烟 PASS(M0-01✅)、spec v0 经 REV-001 两轮审查后 pin。下一步 M1 UVM 骨架。"}
